@@ -1,9 +1,23 @@
 
-
+--externals:
 local loveframes = require("LoveFrames.loveframes")
 local serial = require("serial")
+local bluetooth = require("bluetooth")
+local wifi = require("wifi")
+local ethernet = require("ethernet")
 
 
+--contener for GUI interaction
+local activeGUI = {}
+
+-- clear interface function
+
+local function clearActiveGUI()
+    for _, element in ipairs(activeGUI) do
+        element:Remove() --delete element
+  end
+    activeGUI = {} -- clear tab
+end
 
 function createGUI()
   love.window.setTitle("AT-Commander")
@@ -28,8 +42,8 @@ function createGUI()
   button1:SetImage(serialImage) -- image setting
   button1.OnClick = function()
     --print("Serial")
-
-    serial.create()
+  clearActiveGUI()
+  activeGUI = serial.create()
   end
 
   local button2 = loveframes.Create("button")
@@ -38,8 +52,9 @@ function createGUI()
   button2:SetPos(140, 60)
   button2:SetImage(bluetoothImage) -- image setting
   button2.OnClick = function()
-    print("Bluetooth")
-
+    --print("Bluetooth")
+  clearActiveGUI()
+  activeGUI = bluetooth.create()
   end
 
 
@@ -50,7 +65,8 @@ function createGUI()
   button3:SetImage(wifiImage) -- image setting
   button3.OnClick = function()
     print("WiFi")
-
+  clearActiveGUI()
+  activeGUI = wifi.create()
   end
 
   local button4 = loveframes.Create("button")
@@ -60,19 +76,12 @@ function createGUI()
   button4:SetImage(ethernetImage) -- image setting
   button4.OnClick = function()
     print("Ethernet")
+  clearActiveGUI()
+  activeGUI = ethernet.create()
 
   end
 
-  if Chocie == 0 then
-    print("Serial")
 
-  elseif Choice == 1 then
-
-  elseif Choice == 2 then
-
-  elseif Choice == 3 then
-
-  end
 end
 
 return {

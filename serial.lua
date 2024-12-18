@@ -4,7 +4,7 @@ local loveframes = require("LoveFrames.loveframes")
 function Serial() --section for serial settings
     print("Serial")
 
-
+    local uiElements = {}
     local header = loveframes.Create("text")
     header:SetPos(170,170)
     header:SetText("Serial port")
@@ -93,6 +93,21 @@ function Serial() --section for serial settings
     dropdown5.OnChoiceSelected = function(object, choice)
         print("Set flow control", choice)
     end
+
+    --put gui elements to the table
+
+    table.insert(uiElements, header)
+    table.insert(uiElements, label)
+    table.insert(uiElements, label2)
+    table.insert(uiElements, label3)
+    table.insert(uiElements, label4)
+    table.insert(uiElements, label5)
+    table.insert(uiElements, dropdown)
+    table.insert(uiElements, dropdown2)
+    table.insert(uiElements, dropdown3)
+    table.insert(uiElements, dropdown4)
+    table.insert(uiElements, dropdown5)
+    return uiElements
 end
 
 return {
